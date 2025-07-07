@@ -1,0 +1,27 @@
+[
+    {
+        "nombre": "Mateo",
+        "puntaje": 50,
+        "fecha": "2025-07-06T22:39:08.825935"
+    },
+    {
+        "nombre": "Matias",
+        "puntaje": 30,
+        "fecha": "2025-07-06T22:39:08.825935"
+    },
+    {
+        "nombre": "Florencia",
+        "puntaje": 50,
+        "fecha": "2025-07-06T22:39:08.825935"
+    },
+    {
+        "nombre": "Luna",
+        "puntaje": 0,
+        "fecha": "2025-07-06T22:39:08.825935"
+    },
+    {
+        "nombre": "Mario",
+        "puntaje": 80,
+        "fecha": "2025-07-06T22:40:38.029522"
+    }
+]

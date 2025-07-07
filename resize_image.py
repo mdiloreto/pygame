@@ -21,11 +21,15 @@ def resize_image(input_path, output_path, size):
         pygame.quit()
 
 if __name__ == '__main__':
+    import os
+    # Get the absolute path to the directory where the script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     # Path to your original image
-    input_image_path = '/home/mdiloreto/vscode/pygame/recursos/imagenes/fondo2.png'
+    input_image_path = os.path.join(script_dir, 'recursos', 'imagenes', 'river-plate-mundial-eliminacion.jpg')
     # Path to save the new resized image
-    output_image_path = '/home/mdiloreto/vscode/pygame/recursos/imagenes/fondo2_resized.png'
+    output_image_path = os.path.join(script_dir, 'recursos', 'imagenes', 'game_over.png')
     # New dimensions
     new_size = (1280, 720)
 
     resize_image(input_image_path, output_image_path, new_size)
+
