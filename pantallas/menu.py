@@ -1,5 +1,5 @@
 import pygame, configuracion as cfg
-import music
+import modulos.music as music
 
 # Estos objetos se crean una vez y viven en el módulo
 _fondo = None

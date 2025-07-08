@@ -19,6 +19,7 @@ FONT_BOLD_PATH   = 'recursos/fuentes/static/OpenSans-Bold.ttf'
 FONT_REG_PATH    = 'recursos/fuentes/static/OpenSans-Regular.ttf'
 IMG_FONDO_PREGUNTAS = 'recursos/imagenes/fondo_pregs.png'
 IMG_DERROTA = 'recursos/imagenes/game_over.png'
+IMG_TOP10 = 'recursos/imagenes/merentiel.jpg'
 # Atajos de texto
 TITULO_VENTANA = "Preguntados sobre el Mundial de Clubes"
 ICONO = "recursos/imagenes/icono.png"

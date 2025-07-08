@@ -1,5 +1,5 @@
 import pygame, configuracion as cfg
-import music as music
+import modulos.music as music
 
 _fondo = None
 _iconos_grandes = False

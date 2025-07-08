@@ -25,9 +25,9 @@ if __name__ == '__main__':
     # Get the absolute path to the directory where the script is located
     script_dir = os.path.dirname(os.path.abspath(__file__))
     # Path to your original image
-    input_image_path = os.path.join(script_dir, 'recursos', 'imagenes', 'river-plate-mundial-eliminacion.jpg')
+    input_image_path = os.path.join(script_dir, 'recursos', 'imagenes', 'merentiel.jpg')
     # Path to save the new resized image
-    output_image_path = os.path.join(script_dir, 'recursos', 'imagenes', 'game_over.png')
+    output_image_path = os.path.join(script_dir, 'recursos', 'imagenes', 'merentiel_resize.jpg')
     # New dimensions
     new_size = (1280, 720)
 

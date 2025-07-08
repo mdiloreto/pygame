@@ -1,7 +1,8 @@
 import csv, random, pygame, configuracion as cfg
 import textwrap
-import music
+import modulos.music as music
 from pantallas.game_over import preguntas_info
+import modulos.comodines as comodines
 
 TIEMPO_PREGUNTA_MS = 20_000
 EVENTO_FEEDBACK    = pygame.USEREVENT + 1          # 1,2 s de pausa
@@ -27,7 +28,7 @@ fondo      = None
 font_q     = None
 font_opt   = None
 racha      = 0
-show_msg = False 
+show_msg_vida_add = False 
 # 
 
 
@@ -78,7 +79,7 @@ def _nueva_pregunta():
     t0_ms  = pygame.time.get_ticks()
 
 def _evaluar_respuesta(i):
-    global estado, puntaje, vidas, racha, show_msg, msg_expira_ms
+    global estado, puntaje, vidas, racha, show_msg_vida_add, msg_expira_ms
     correcta  = preguntas[idx]["correct"]
     seleccion = opciones[i]
     if seleccion == correcta:
@@ -87,7 +88,7 @@ def _evaluar_respuesta(i):
         if racha == 5:
             vidas += 1
             racha = 0
-            show_msg      = True          # activa mensaje
+            show_msg_vida_add      = True          # activa mensaje
             msg_expira_ms = pygame.time.get_ticks() + 2000   # 2 s
         else: 
             racha += 1
@@ -131,9 +132,9 @@ def manejar_evento(ev):
     return "pregunta"
 
 def actualizar(dt):
-    global estado, vidas, show_msg
-    if show_msg and pygame.time.get_ticks() > msg_expira_ms:
-        show_msg = False
+    global estado, vidas, show_msg_vida_add
+    if show_msg_vida_add and pygame.time.get_ticks() > msg_expira_ms:
+        show_msg_vida_add = False
     if estado == "pregunta" and pygame.time.get_ticks() - t0_ms > TIEMPO_PREGUNTA_MS:
         vidas -= 1
         estado = "feedback"
@@ -156,7 +157,7 @@ def dibujar(win):
     txt_live = font_emoji.render("❤️" * vidas, True, COLOR_VIDAS)     
     win.blit(txt_pts,  (20, 20))
     win.blit(txt_live, (cfg.ANCHO - txt_live.get_width() - 20, 20)) # total del ancho - with del texto de la vida - 20 px de margen
-
+    comodines.dibujar(win)
     # pregunta
     lineas = textwrap.wrap(preguntas[idx]["question"], width=50)   
     y = 140                                                       
@@ -177,7 +178,7 @@ def dibujar(win):
         txt_o = font_opt.render(opc, True, cfg.NEGRO)
         win.blit(txt_o, txt_o.get_rect(center=RECTS_OPC[i].center))
 
-    if show_msg:
+    if show_msg_vida_add:
         font_msg = pygame.font.Font(cfg.FONT_BOLD_PATH, 36)
         surf_msg = font_msg.render("+1 VIDA ❤", True, cfg.VERDE)
         win.blit(surf_msg, (cfg.ANCHO - surf_msg.get_width() - 40, 100))

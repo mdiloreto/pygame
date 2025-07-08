@@ -56,6 +56,11 @@ def stop_music():
     # Volumen de la musica del juego
 
 def set_volume(new):
+    """Setea el volumen de la musica.
+
+    Args:
+        new (_type_): nuevo valor del volumen
+    """
     global vol
     vol = max(0.0, min(new, 1.0))  
     mixer.music.set_volume(vol)
@@ -77,6 +82,11 @@ def dibujar_icono(win):
     
     # Manejo de eventos 
 def manejar_evento(ev):
+    """Manejador de eventos. 
+
+    Args:
+        ev (_type_): ingresa el evento de pygame del loop principal.
+    """
     global muteado, vol
     if ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1:
         if RECT_MUTE.collidepoint(ev.pos):

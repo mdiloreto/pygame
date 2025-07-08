@@ -1,6 +1,6 @@
 import pygame, sys
 import configuracion as cfg
-import music
+import modulos.music as music
 from pantallas import menu, pregunta, top10, game_over, config
 
 
