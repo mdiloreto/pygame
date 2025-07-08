@@ -43,13 +43,13 @@ def dibujar(win):
 
         # Titulo
     if not _puntajes:
-            titulo_surf = _fuente_titulo.render("Aún No hay puntajes", True, cfg.AMARILLO)
-            titulo_rect = titulo_surf.get_rect(center=(cfg.ANCHO // 2, 80))
-            win.blit(titulo_surf, titulo_rect)
+            titulo_render = _fuente_titulo.render("Aún No hay puntajes", True, cfg.AMARILLO)
+            titulo_rect = titulo_render.get_rect(center=(cfg.ANCHO // 2, 80))
+            win.blit(titulo_render, titulo_rect)
     else:
-        titulo_surf = _fuente_titulo.render("Top 10 Mejores Puntajes", True, cfg.AMARILLO)
-        titulo_rect = titulo_surf.get_rect(center=(cfg.ANCHO // 2, 80))
-        win.blit(titulo_surf, titulo_rect)
+        titulo_render = _fuente_titulo.render("Top 10 Mejores Puntajes", True, cfg.AMARILLO)
+        titulo_rect = titulo_render.get_rect(center=(cfg.ANCHO // 2, 80))
+        win.blit(titulo_render, titulo_rect)
 
     # Dibujar puntajes
     alto = 180
@@ -61,7 +61,7 @@ def dibujar(win):
         fecha_formateada = fecha_obj.strftime("%d-%m-%Y")
 
         puntaje_text = f"{i+1}. {name} - Puntos: {puntaje} - Fecha: {fecha_formateada}"
-        puntaje_surf = _fuente_puntaje.render(puntaje_text, True, cfg.BLANCO)
-        puntaje_rect = puntaje_surf.get_rect(center=(cfg.ANCHO // 2, alto))
-        win.blit(puntaje_surf, puntaje_rect)
+        puntaje_render = _fuente_puntaje.render(puntaje_text, True, cfg.BLANCO)
+        puntaje_rect = puntaje_render.get_rect(center=(cfg.ANCHO // 2, alto))
+        win.blit(puntaje_render, puntaje_rect)
         alto += 40
