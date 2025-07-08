@@ -22,6 +22,7 @@ pantallas = {
     
 }
 
+# inicializar la plantalla 'menu' al empezar el juego 
 pantallas[pantalla_actual].loop_principal()
 
 while True:

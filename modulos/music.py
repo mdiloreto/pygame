@@ -59,7 +59,6 @@ def stop_music():
     mixer.music.stop()
 
     # Volumen de la musica del juego
-
 def set_volume(new):
     """Setea el volumen de la musica.
 
