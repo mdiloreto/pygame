@@ -8,8 +8,8 @@ pygame.init()
 music.play_music()
 pygame.display.set_caption(cfg.TITULO_VENTANA)
 pantalla = pygame.display.set_mode(cfg.SIZE)
-icono_sur = pygame.image.load(cfg.ICONO) #Icono Surface
-icono = pygame.display.set_icon(icono_sur) # Apply del icono surface
+icono_sur = pygame.image.load(cfg.ICONO) #Icono 
+icono = pygame.display.set_icon(icono_sur) # Apply del icono 
 reloj    = pygame.time.Clock()
 
 pantalla_actual  = 'menu'
