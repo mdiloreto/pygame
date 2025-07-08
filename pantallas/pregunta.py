@@ -67,7 +67,7 @@ def _cargar_preguntas(path):
     Args:
         ruta (path): Path del archivo CSV de las preguntas
     """
-    global preguntast
+    global preguntas
     with open(path, encoding="utf-8") as f:
         preguntas = list(csv.DictReader(f))
     random.shuffle(preguntas)
