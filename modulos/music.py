@@ -43,6 +43,11 @@ def sonido_gameover():
     sonido.set_volume(0.2)
     return sonido
 
+def sonido_click_off():
+    sonido = mixer.Sound('recursos/sonidos/click_off.mp3')
+    sonido.set_volume(0.2)
+    return sonido
+
 # Musica del juego
 
 def play_music():
@@ -92,10 +97,10 @@ def manejar_evento(ev):
         if RECT_MUTE.collidepoint(ev.pos):
             muteado = not muteado
             if muteado:
-                sonido_click().play
+                sonido_click().play()
                 mixer.music.pause()
             else:
-                sonido_click().play
+                sonido_click().play()
                 mixer.music.unpause()
         elif RECT_UP.collidepoint(ev.pos):
             sonido_click().play

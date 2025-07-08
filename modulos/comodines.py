@@ -1,7 +1,6 @@
 import pygame
 import configuracion as cfg
-import random
-
+import modulos.music as music
 
 #Constantes
 FONT = pygame.font.Font('recursos/fuentes/Symbola.ttf', 48)
@@ -27,14 +26,23 @@ X2_activo = False
 doble_activo = False
 paso_activo = False 
 
-def init_comodines(ANCHO, ALTO, margen=20):
+def init_comodines(ALTO, margen=20):
     """
     Inicializamos las posiciones de los comodines en pantalla. 
     """
-    RECT_BOMB.bottomleft = (ANCHO, ALTO)
-    RECT_X2.bottomleft = (RECT_BOMB.right + margen, ALTO)
-    RECT_DOBLE.bottomleft = (RECT_X2.right + margen, ALTO)
-    RECT_PASO.bottomleft = (RECT_DOBLE.right + margen, ALTO)
+    y_base = ALTO - margen          
+    x      = margen
+
+    RECT_BOMB.bottomleft   = (x, y_base)
+    x = RECT_BOMB.right + margen
+
+    RECT_X2.bottomleft     = (x, y_base)
+    x = RECT_X2.right + margen
+
+    RECT_DOBLE.bottomleft  = (x, y_base)
+    x = RECT_DOBLE.right + margen
+
+    RECT_PASO.bottomleft   = (x, y_base)
     
     
 def reset():
@@ -51,17 +59,32 @@ def manejar_evento(ev):
     """
     global bomba_usado, X2_usado, doble_usado, paso_usado, X2_activo, doble_activo, bomba_activa, paso_activo
 
+    if ev.type != pygame.MOUSEBUTTONDOWN or ev.button != 1:
+        return   
+    
     if not bomba_usado and RECT_BOMB.collidepoint(ev.pos):
-        bomba_activa = True 
+        music.sonido_click().play()
+        bomba_activa = True
+    elif bomba_usado and RECT_BOMB.collidepoint(ev.pos):
+        music.sonido_click_off().play()
         
     if not X2_usado and RECT_X2.collidepoint(ev.pos):
+        music.sonido_click().play()
         X2_activo = True
+    elif X2_usado and RECT_X2.collidepoint(ev.pos):
+        music.sonido_click_off().play()
     
     if not doble_usado and RECT_DOBLE.collidepoint(ev.pos):
+        music.sonido_click().play()
         doble_activo = True
+    elif doble_usado and RECT_BOMB.collidepoint(ev.pos):
+        music.sonido_click_off().play()
     
     if not paso_usado and RECT_PASO.collidepoint(ev.pos):
+        music.sonido_click().play()
         paso_activo = True
+    elif paso_usado and RECT_BOMB.collidepoint(ev.pos):
+        music.sonido_click_off().play()
 
 def dibujar(win):
     win.blit(BOMBA, RECT_BOMB)

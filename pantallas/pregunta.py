@@ -4,9 +4,9 @@ import modulos.music as music
 from pantallas.game_over import preguntas_info
 import modulos.comodines as comodines
 
+#Constatnes 
 TIEMPO_PREGUNTA_MS = 20_000
 EVENTO_FEEDBACK    = pygame.USEREVENT + 1          # 1,2 s de pausa
-
 RECTS_OPC = [
     # x = coord horizontal, y = cord vertical, w = ancho del rect y h = alto del rect
     pygame.Rect(390, 300, 500, 70), 
@@ -37,7 +37,7 @@ def loop_principal():
         -> Inicia la carga de preguntas "_cargar_preguntas"
         -> Inicia una nueva partida "_nueva_partida"
     """
-    global fondo, font_q, font_opt
+    global fondo, font_q, font_opt, opciones
 
     if fondo is None:
         fondo    = pygame.image.load(cfg.IMG_FONDO_PREGUNTAS)
@@ -46,9 +46,20 @@ def loop_principal():
     if font_opt is None: 
         font_opt = pygame.font.Font(cfg.FONT_REG_PATH, 38)
 
-
+    comodines.init_comodines(cfg.ALTO)
     _cargar_preguntas(preguntas_csv)
     _nueva_partida()
+
+def _usar_comodin_bomba(lista_op):    
+    global preguntas
+    
+    correcta = preguntas[idx]["correct"]
+    incorrectas = [o for o in lista_op if o != correcta]
+    nuevas = [correcta, random.choice(incorrectas)]
+    random.shuffle(nuevas)
+    while len(nuevas) < 4:          # ← hasta 4, no hasta 2
+        nuevas.append(None)
+    return nuevas
 
 def _cargar_preguntas(path):
     """Carga el CSV de las preguntas 
@@ -66,9 +77,11 @@ def _nueva_partida():
     
     """
     global idx, vidas, puntaje
+    comodines.reset()
     vidas = total_vidas
     idx, puntaje = 0, 0
     _nueva_pregunta()
+
 
 def _nueva_pregunta():
     global opciones, estado, t0_ms
@@ -84,7 +97,12 @@ def _evaluar_respuesta(i):
     seleccion = opciones[i]
     if seleccion == correcta:
         music.sonido_correcto().play()
-        puntaje += 10
+        if comodines.X2_activo: 
+            puntaje += 20
+            comodines.X2_usado = True
+            comodines.X2_activo = False
+        else:
+            puntaje += 10
         if racha == 5:
             vidas += 1
             racha = 0
@@ -102,12 +120,16 @@ def _evaluar_respuesta(i):
 def manejar_evento(ev):
     global idx, vidas, estado
 
+    comodines.manejar_evento(ev)
+    
     if ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:
         return "menu"
     if ev.type == pygame.QUIT:
         return "salir"
     if estado == "pregunta" and ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1:
         for i, r in enumerate(RECTS_OPC):
+            if opciones[i] is None:
+                continue 
             if r.collidepoint(ev.pos):
                 _evaluar_respuesta(i)
                 break
@@ -132,16 +154,24 @@ def manejar_evento(ev):
     return "pregunta"
 
 def actualizar(dt):
-    global estado, vidas, show_msg_vida_add
+    global estado, vidas, show_msg_vida_add, opciones
     if show_msg_vida_add and pygame.time.get_ticks() > msg_expira_ms:
         show_msg_vida_add = False
+    
     if estado == "pregunta" and pygame.time.get_ticks() - t0_ms > TIEMPO_PREGUNTA_MS:
         vidas -= 1
         estado = "feedback"
         pygame.time.set_timer(EVENTO_FEEDBACK, 1200)
         
+    # ejecución de comodines
+    if comodines.bomba_activa:
+        opciones = _usar_comodin_bomba(opciones)
+        comodines.bomba_activa = False
+        comodines.bomba_usado = True
 
 def dibujar(win):
+    global opciones, preguntas
+    
     win.blit(fondo, (0, 0))
 
     # Color vidas 
@@ -166,8 +196,10 @@ def dibujar(win):
         win.blit(surf, (cfg.ANCHO//2 - surf.get_width()//2, y))  
         y += font_q.get_linesize()  
 
-    # opciones
+    # muestra opciones, correcta, incorrecta y todas 
     for i, opc in enumerate(opciones):
+        if opc is None:
+            continue
         color = cfg.AMARILLO
         if estado == "feedback":
             if opc == preguntas[idx]["correct"]:
@@ -175,8 +207,8 @@ def dibujar(win):
             elif RECTS_OPC[i].collidepoint(pygame.mouse.get_pos()):
                 color = cfg.ROJO
         pygame.draw.rect(win, color, RECTS_OPC[i], border_radius=8)
-        txt_o = font_opt.render(opc, True, cfg.NEGRO)
-        win.blit(txt_o, txt_o.get_rect(center=RECTS_OPC[i].center))
+        txt_opciones = font_opt.render(opc, True, cfg.NEGRO)
+        win.blit(txt_opciones, txt_opciones.get_rect(center=RECTS_OPC[i].center))
 
     if show_msg_vida_add:
         font_msg = pygame.font.Font(cfg.FONT_BOLD_PATH, 36)
