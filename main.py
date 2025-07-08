@@ -3,15 +3,18 @@ import configuracion as cfg
 import modulos.music as music
 from pantallas import menu, pregunta, top10, game_over, config
 
-
+#Inicializaciones
 pygame.init()
 music.play_music()
+
+#config pygame
 pygame.display.set_caption(cfg.TITULO_VENTANA)
 pantalla = pygame.display.set_mode(cfg.SIZE)
 icono_sur = pygame.image.load(cfg.ICONO) #Icono 
 icono = pygame.display.set_icon(icono_sur) # Apply del icono 
 reloj    = pygame.time.Clock()
 
+# Diccionario de pantallas
 pantalla_actual  = 'menu'
 pantallas = {
     'menu':      menu,

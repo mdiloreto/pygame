@@ -65,24 +65,28 @@ def manejar_evento(ev):
     if not bomba_usado and RECT_BOMB.collidepoint(ev.pos):
         music.sonido_click().play()
         bomba_activa = True
+        
     elif bomba_usado and RECT_BOMB.collidepoint(ev.pos):
         music.sonido_click_off().play()
         
     if not X2_usado and RECT_X2.collidepoint(ev.pos):
         music.sonido_click().play()
         X2_activo = True
+        
     elif X2_usado and RECT_X2.collidepoint(ev.pos):
         music.sonido_click_off().play()
     
     if not doble_usado and RECT_DOBLE.collidepoint(ev.pos):
         music.sonido_click().play()
         doble_activo = True
+        
     elif doble_usado and RECT_BOMB.collidepoint(ev.pos):
         music.sonido_click_off().play()
     
     if not paso_usado and RECT_PASO.collidepoint(ev.pos):
         music.sonido_click().play()
         paso_activo = True
+        
     elif paso_usado and RECT_BOMB.collidepoint(ev.pos):
         music.sonido_click_off().play()
 

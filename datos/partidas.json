@@ -108,5 +108,10 @@
         "nombre": "Florencia",
         "puntaje": 30,
         "fecha": "2025-07-07T22:18:18.390852"
+    },
+    {
+        "nombre": "Mateo",
+        "puntaje": 20,
+        "fecha": "2025-07-08T18:30:11.081469"
     }
 ]

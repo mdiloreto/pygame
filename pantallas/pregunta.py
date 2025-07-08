@@ -67,7 +67,7 @@ def _cargar_preguntas(path):
     Args:
         ruta (path): Path del archivo CSV de las preguntas
     """
-    global preguntas
+    global preguntast
     with open(path, encoding="utf-8") as f:
         preguntas = list(csv.DictReader(f))
     random.shuffle(preguntas)
@@ -195,8 +195,8 @@ def dibujar(win):
     lineas = textwrap.wrap(preguntas[idx]["question"], width=50)   
     y = 140                                                       
     for linea in lineas:
-        surf = font_q.render(linea, True, cfg.BLANCO)
-        win.blit(surf, (cfg.ANCHO//2 - surf.get_width()//2, y))  
+        rect = font_q.render(linea, True, cfg.BLANCO)
+        win.blit(rect, (cfg.ANCHO//2 - rect.get_width()//2, y))  
         y += font_q.get_linesize()  
 
     # muestra opciones, correcta, incorrecta y todas 
@@ -215,5 +215,5 @@ def dibujar(win):
 
     if show_msg_vida_add:
         font_msg = pygame.font.Font(cfg.FONT_BOLD_PATH, 36)
-        surf_msg = font_msg.render("+1 VIDA ❤", True, cfg.VERDE)
-        win.blit(surf_msg, (cfg.ANCHO - surf_msg.get_width() - 40, 100))
+        rect_msg = font_msg.render("+1 VIDA ❤", True, cfg.VERDE)
+        win.blit(rect_msg, (cfg.ANCHO - rect_msg.get_width() - 40, 100))
