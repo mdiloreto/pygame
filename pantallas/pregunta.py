@@ -114,6 +114,9 @@ def _evaluar_respuesta(i):
         music.sonido_error().play()
         vidas -=1
         racha = 0
+        if comodines.X2_activo: 
+            comodines.X2_usado = True
+            comodines.X2_activo = False
     estado = "feedback"
     pygame.time.set_timer(EVENTO_FEEDBACK, 1200)   # Reiniciar el tiempo
 
