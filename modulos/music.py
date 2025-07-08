@@ -119,9 +119,10 @@ def resize_icons(factor=1.0):
     c_up    = RECT_UP.center
     c_down  = RECT_DOWN.center
 
-    def _scale(surf):
-        w, h = surf.get_size()
-        return pygame.transform.smoothscale(surf, (int(w*factor), int(h*factor)))
+    def _scale(rect):
+        """función helper para cambiar el tamaño de los rectangulos usando 'pygame.transform.smoothscale' """
+        w, h = rect.get_size()
+        return pygame.transform.smoothscale(rect, (int(w*factor), int(h*factor)))
 
     MUSIC_ON  = _scale(MUSIC_ON)
     MUSIC_OFF = _scale(MUSIC_OFF)
