@@ -15,7 +15,7 @@ MAX_CHARS   = 12
 FONT_INPUT  = None   
 RECT_INPUT  = pygame.Rect(cfg.ANCHO//2 - 200, 460, 400, 70) 
 
-def loop_principal():
+def main():
     global _titulo_txt, _fondo, _font_titulo, _iconos_grandes, FONT_INPUT
 
     if _fondo is None:

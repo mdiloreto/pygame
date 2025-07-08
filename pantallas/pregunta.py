@@ -32,7 +32,7 @@ show_msg_vida_add = False
 # 
 
 
-def loop_principal():
+def main():
     """Se usa para entrar en la pantalla.
         -> Inicia la carga de preguntas "_cargar_preguntas"
         -> Inicia una nueva partida "_nueva_partida"

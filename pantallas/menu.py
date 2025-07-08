@@ -9,7 +9,7 @@ _btn_top10_rect  = _btn_jugar_rect.copy().move(0, 120)  # lo bajo 120 px
 _btn_config_rect = _btn_top10_rect.copy().move(0, 120)  # lo bajo 120 px + 120 px
 
 
-def loop_principal():
+def main():
     global _fondo, _font
     if _fondo is None:
         _fondo = pygame.image.load(cfg.IMG_FONDO_MENU).convert()

@@ -7,7 +7,7 @@ _fuente_titulo = None
 _fuente_puntaje = None
 _puntajes = []
 
-def loop_principal():
+def main():
     global _fondo, _fuente_titulo, _fuente_puntaje, _puntajes
 
     if _fondo is None:

@@ -4,7 +4,7 @@ import modulos.music as music
 _fondo = None
 _iconos_grandes = False
 
-def loop_principal():
+def main():
     global _fondo, _font_titulo, _titulo_surf, _titulo_rect, _iconos_grandes
 
     if _fondo is None:

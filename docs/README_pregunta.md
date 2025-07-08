@@ -84,10 +84,10 @@ show_msg_vida_add = False
 
 ## 3. Funciones Principales
 
-### `loop_principal()`
+### `main()`
 
 ```python
-def loop_principal():
+def main():
     """Se usa para entrar en la pantalla.
         -> Inicia la carga de preguntas "_cargar_preguntas"
         -> Inicia una nueva partida "_nueva_partida"
@@ -427,7 +427,7 @@ def dibujar(win):
 
 ## 4. Flujo de la Lógica
 
-1.  **Inicio de la pantalla (`loop_principal`)**:
+1.  **Inicio de la pantalla (`main`)**:
     *   Carga recursos (fondo, fuentes).
     *   Inicializa comodines.
     *   Carga todas las preguntas del CSV.

@@ -23,7 +23,7 @@ pantallas = {
 }
 
 # inicializar la plantalla 'menu' al empezar el juego 
-pantallas[pantalla_actual].loop_principal()
+pantallas[pantalla_actual].main()
 
 while True:
     dt = reloj.tick(cfg.FPS)
@@ -37,7 +37,7 @@ while True:
         siguiente = pantallas[pantalla_actual].manejar_evento(ev)
         if siguiente != pantalla_actual:
             pantalla_actual = siguiente
-            pantallas[pantalla_actual].loop_principal()
+            pantallas[pantalla_actual].main()
 
     # Lógica + Dibujo 
     pantallas[pantalla_actual].actualizar(dt)
