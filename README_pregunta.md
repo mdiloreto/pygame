@@ -123,7 +123,7 @@ def _usar_comodin_bomba(lista_op):
     incorrectas = [o for o in lista_op if o != correcta]
     nuevas = [correcta, random.choice(incorrectas)]
     random.shuffle(nuevas)
-    while len(nuevas) < 4:          # ← hasta 4, no hasta 2
+    while len(nuevas) < 4:
         nuevas.append(None)
     return nuevas
 ```
